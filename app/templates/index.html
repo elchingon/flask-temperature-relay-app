@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %} {{constants.APP_NAME}} {% endblock %}
+{% block content %}
+    {{ super() }}   
+    <div id="log"></div>
+
+    {% from "helpers/forms.html" import render_field %}
+    <form method=post>
+        <div class="row">
+            <div class="col">
+                <h1>Temp #1</h1>
+                <div id="temp_1_current">
+                    <h4>Current: <span>{{ temp_1 }}</span>º C</h4>
+                    <div class="row">
+                        <div class="col">
+                            {{ render_field(form.temp1_min_temp, "Min")}} 
+                        </div>
+                        <div class="col">
+                            {{ render_field(form.temp1_max_temp, "Max")}}
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h1>Temp #2 </h1>
+                <div id="temp_2_current">
+                    <h4>Current: <span>{{ temp_2 }}</span>º C</h4>
+                    <div class="row">
+                        <div class="col">
+                            {{ render_field(form.temp2_min_temp, "Min")}} 
+                        </div>
+                        <div class="col">
+                            {{ render_field(form.temp2_max_temp, "Max")}}
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h1>Temp #3 </h1>
+                <div id="temp_3_current">
+                    <h4>Current: <span>{{ temp_3 }}</span>º C</h4>
+                    <div class="row">
+                        <div class="col">
+                            {{ render_field(form.temp3_min_temp, "Min")}} 
+                        </div>
+                        <div class="col">
+                            {{ render_field(form.temp3_max_temp, "Max")}}
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type=submit value="Save">
+            </div>
+        </div>
+    </form>
+{% endblock content %}
