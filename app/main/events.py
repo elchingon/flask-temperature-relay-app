@@ -2,6 +2,7 @@ from flask import session
 from flask_socketio import emit
 from .. import socketio, thread_lock, thread
 from .. import relay
+from .models import TemperatureSensor
 
 import requests
 import json
