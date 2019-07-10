@@ -131,17 +131,13 @@ def turn_on_relay(temp_id):
   socketio.emit('compressor_response', {'data': 'On', 'temp_id': temp_id}, namespace='/ac_control')
 
 def get_relay_pin(temp_id):
-  relay_pin = None;
-  switch(temp_id){
-    case 'temp_1':
-      relay_pin = 23
-      break
-    case 'temp_2':
-      relay_pin = 24
-      break
-    case 'temp_3':
-      relay_pin = 25
-      break
+  relay_pin = None
+  switcher = {
+    0: 23,
+    1: 24,
+    2: 25
+
   }
-  return relay_pin    
+  
+  return switcher.get(temp_id, 0)    
       
