@@ -40,7 +40,7 @@ def turn_on_relay_event(temp_id):
 def turn_off_relay_event(temp_id):
   turn_off_relay(temp_id)
 
-def set_min_max():
+def set_min_max_values():
   temp1 = TemperatureSensor.query.filter_by(title="v2temp1").first()
   temp2 = TemperatureSensor.query.filter_by(title="v2temp2").first() 
   temp3 = TemperatureSensor.query.filter_by(title="v2temp3").first()
