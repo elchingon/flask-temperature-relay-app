@@ -132,7 +132,7 @@ def turn_on_relay(temp_id):
 
 def get_relay_pin(temp_id):
   relay_pin = None;
-  switch(temp_id):
+  switch(temp_id){
     case 'temp_1':
       relay_pin = 23
       break
@@ -142,5 +142,6 @@ def get_relay_pin(temp_id):
     case 'temp_3':
       relay_pin = 25
       break
+  }
   return relay_pin    
       
