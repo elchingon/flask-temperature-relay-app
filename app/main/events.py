@@ -3,7 +3,7 @@ from flask_socketio import emit, disconnect
 from .. import socketio, thread_lock, thread
 from .. import relay
 from .models import TemperatureSensor
-from .helper_methods import temperature_request, get_relay_pin
+from .helper_methods import temperature_request, get_min_max_defaults, get_relay_pin
 
 import requests
 import json
@@ -48,10 +48,11 @@ def disconnect_request():
          callback=can_disconnect)
 
       
-def run_ac_control(id1_min=25, id1_max=27, id2_min=24, id2_max=25, id3_min=23, id3_max=25):  
+def run_ac_control(id1_min=None, id1_max=None, id2_min=None, id2_max=None, id3_min=None, id3_max=None):  
   try:
     # id1_temp = temperature_request('http://69.146.20.99:5000') # temperature_request('http://v2temp1.local:5555') 
     # id2_temp = temperature_request('http://69.146.20.99:5000', 2) # temperature_request('http://v2temp1.local:5555') 
+    # id3_temp = temperature_request('http://69.146.20.99:5000') # temperature_request('http://v2temp1.local:5555') 
     id1_temp = temperature_request('http://v2temp1.local:5555') 
     socketio.emit('temp_response', { 'data': id1_temp, 'temp_id': 'temp_1' }, namespace='/ac_control')
     id2_temp = temperature_request('http://v2temp2.local:5556')
@@ -64,6 +65,23 @@ def run_ac_control(id1_min=25, id1_max=27, id2_min=24, id2_max=25, id3_min=23, i
     relay.trigger_relay(False, 27)
     relay.trigger_relay(False, 22)
      
+    if (id1_min is None or id1_max is None):
+      id1_min, id1_max = get_min_max_defaults('temp_1')
+    if (id2_min is None or id2_max is None):
+      id2_min, id2_max = get_min_max_defaults('temp_2')
+    if (id3_min is None or id3_max is None):
+      id3_min, id3_max = get_min_max_defaults('temp_3')
+      
+    # print("FIRST" + str(id1_min))
+    # print("FIRSTM" + str(id1_max))
+    # print("FIRSTT" + str(id1_temp))
+    # print("SEC" + str(id2_min))
+    # print("SECM" + str(id2_max))
+    # print("SECT" + str(id2_temp))
+    # print("THR" + str(id3_min))
+    # print("THRM" + str(id3_max))
+    # print("THRT" + str(id3_temp))
+
     if float(id1_temp) >= float(id1_max) and float(id2_temp) >= float(id2_max) and float(id3_temp) >= float(id3_max):
       logging.info("Compressors on")
       turn_on_relay('temp_1')
@@ -79,25 +97,8 @@ def run_ac_control(id1_min=25, id1_max=27, id2_min=24, id2_max=25, id3_min=23, i
     logging.info("Temp2:"+str(id2_temp))
     logging.info("Temp3:"+str(id3_temp))
     
-    time.sleep(5)
-  # except requests.exceptions.HTTPError as errh:
-  #   logging.warning("Http Error:" + errh)
-  #   time.sleep(5)
-  #   continue
-  # except requests.exceptions.ConnectionError as errc:
-  #   logging.warning("Error Connecting:" + errc)
-  #   time.sleep(5)
-  #   continue
-  # except requests.exceptions.Timeout as errt:
-  #   logging.warning("Timeout Error:" + errt)     
-  #   time.sleep(5)
-  #   continue
-  # except requests.exceptions.RequestException as err:
-  #   logging.warning("OOps: Something Else" + err)
-  #   time.sleep(5)
-  #   continue
-  # except KeyboardInterrupt:
-  #   logging.warning("Quit")
+    time.sleep(2)
+  
   except Exception as e:
     print(e)
     logging.warning("Quit" )

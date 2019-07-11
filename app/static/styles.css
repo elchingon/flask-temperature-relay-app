@@ -1,6 +1,9 @@
 div {
   display:block;
 }
+h1, h4, h5{
+  margin: 10px 5px;
+}
 .row {
   display: block;
   width:100%;
@@ -23,11 +26,24 @@ div {
   position: relative;
   width: 100%;
   min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-bottom:10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom:5px;
   margin:5px;
   background-color: #eee;
+}
+.status-on {
+  background-color: green !important;
+}
+.status-off {
+  background-color: red !important;
+}
+.depaddify {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+
 }
 .inline {
   display: -webkit-box;
@@ -40,4 +56,10 @@ div {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+.inline dt {
+  margin-left:8px;
+}
+.inline dd {
+  margin:5px;
 }

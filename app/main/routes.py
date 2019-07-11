@@ -29,6 +29,7 @@ def provide_constants():
 def index():
   # id1_temp = temperature_request('http://69.146.20.99:5000') # temperature_request('http://v2temp1.local:5555') 
   # id2_temp = temperature_request('http://69.146.20.99:5000', 2) # temperature_request('http://v2temp1.local:5555') 
+  # id3_temp = temperature_request('http://69.146.20.99:5000') # temperature_request('http://v2temp1.local:5555') 
   id1_temp = temperature_request('http://v2temp1.local:5555') 
   id2_temp = temperature_request('http://v2temp2.local:5556')
   id3_temp = temperature_request('http://v2temp3.local:5557')

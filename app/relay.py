@@ -4,7 +4,7 @@ import time
 import sys
 
 global SHOULD_FAKE
-SHOULD_FAKE = True
+SHOULD_FAKE = False
 
 try:
   import RPi.GPIO as GPIO

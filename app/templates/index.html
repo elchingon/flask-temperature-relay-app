@@ -7,7 +7,7 @@
     {% from "helpers/forms.html" import render_field %}
     <form method=post>
         <div class="row">
-            <div class="col">
+            <div class="col" id="temp_1_wrapper">
                 <h1>Temp #1</h1>
                 <div id="temp_1_current">
                     <div class="row">
@@ -19,16 +19,16 @@
                         </div>    
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col depaddify">
                             {{ render_field(form.temp1_min_temp, "Min")}} 
                         </div>
-                        <div class="col">
+                        <div class="col depaddify">
                             {{ render_field(form.temp1_max_temp, "Max")}}
                         </div>                            
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="temp_2_wrapper">
                 <h1>Temp #2 </h1>
                 <div id="temp_2_current">
                     <div class="row">
@@ -40,16 +40,16 @@
                         </div>    
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col depaddify">
                             {{ render_field(form.temp2_min_temp, "Min")}} 
                         </div>
-                        <div class="col">
+                        <div class="col depaddify">
                             {{ render_field(form.temp2_max_temp, "Max")}}
                         </div>                            
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="temp_3_wrapper">
                 <h1>Temp #3 </h1>
                 <div id="temp_3_current">
                     <div class="row">
@@ -61,10 +61,10 @@
                         </div>    
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col depaddify">
                             {{ render_field(form.temp3_min_temp, "Min")}} 
                         </div>
-                        <div class="col">
+                        <div class="col depaddify">
                             {{ render_field(form.temp3_max_temp, "Max")}}
                         </div>                            
                     </div>

@@ -17,12 +17,12 @@
             //     http[s]://<domain>:<port>[/<namespace>]
             var socket = io(namespace);
             
-            var id1_min = $("#temp1_min_temp").val();
-            var id1_max = $("#temp1_max_temp").val();
-            var id2_min = $("#temp2_min_temp").val();
-            var id2_max = $("#temp2_max_temp").val();
-            var id3_min = $("#temp3_min_temp").val();
-            var id3_max = $("#temp3_max_temp").val();
+            var id1_min = $("#temp1_min_temp").val() || null;
+            var id1_max = $("#temp1_max_temp").val() || null;
+            var id2_min = $("#temp2_min_temp").val() || null;
+            var id2_max = $("#temp2_max_temp").val() || null;
+            var id3_min = $("#temp3_min_temp").val() || null;
+            var id3_max = $("#temp3_max_temp").val() || null;
             // Event handler for new connections.
             // The callback function is invoked when a connection with the
             // server is established.
@@ -48,6 +48,7 @@
                 console.log(msg)
                 if (msg.data != '') {
                     $('#' + msg.temp_id + '_compressor').find('span').text(msg.data);
+                    $('#' + msg.temp_id + '_wrapper').addClass("status-" + msg.data.toLowerCase());
                 }
                 // if (cb)
                 //     cb();
