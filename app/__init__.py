@@ -14,7 +14,7 @@ def create_app(debug=False):
   # app.debug = debug
   # app = Flask(__name__, instance_relative_config=True)
   app.config['SECRET_KEY'] = 'gjr39dkjn344_!67#'
-  app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ac-control.db'
+  app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ac-control2.db'
   app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
   # app.config.from_object('config.BaseConfiguration')
