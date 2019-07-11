@@ -10,7 +10,14 @@
             <div class="col">
                 <h1>Temp #1</h1>
                 <div id="temp_1_current">
-                    <h4>Current: <span>{{ temp_1 }}</span>º C</h4>
+                    <div class="row">
+                        <div class="col">
+                            <h4>Current: <span>{{ temp_1 }}</span>º C</h4>
+                        </div>    
+                        <div class="col">
+                            <h5 id="temp_1_compressor">Compressor: <span></span></h5> 
+                        </div>    
+                    </div>
                     <div class="row">
                         <div class="col">
                             {{ render_field(form.temp1_min_temp, "Min")}} 
@@ -24,7 +31,14 @@
             <div class="col">
                 <h1>Temp #2 </h1>
                 <div id="temp_2_current">
-                    <h4>Current: <span>{{ temp_2 }}</span>º C</h4>
+                    <div class="row">
+                        <div class="col">
+                            <h4>Current: <span>{{ temp_2 }}</span>º C</h4>
+                        </div>    
+                        <div class="col">
+                            <h5 id="temp_2_compressor">Compressor: <span></span></h5> 
+                        </div>    
+                    </div>
                     <div class="row">
                         <div class="col">
                             {{ render_field(form.temp2_min_temp, "Min")}} 
@@ -38,7 +52,14 @@
             <div class="col">
                 <h1>Temp #3 </h1>
                 <div id="temp_3_current">
-                    <h4>Current: <span>{{ temp_3 }}</span>º C</h4>
+                    <div class="row">
+                        <div class="col">
+                            <h4>Current: <span>{{ temp_3 }}</span>º C</h4> 
+                        </div>    
+                        <div class="col">
+                            <h5 id="temp_3_compressor">Compressor: <span></span></h5> 
+                        </div>    
+                    </div>
                     <div class="row">
                         <div class="col">
                             {{ render_field(form.temp3_min_temp, "Min")}} 

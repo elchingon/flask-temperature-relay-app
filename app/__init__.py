@@ -11,18 +11,20 @@ thread_lock = Lock()
 
 def create_app(debug=False):
   app = Flask(__name__)
-  app.debug = debug
+  # app.debug = debug
+  # app = Flask(__name__, instance_relative_config=True)
   app.config['SECRET_KEY'] = 'gjr39dkjn344_!67#'
   app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ac-control.db'
-  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = FALSE
 
-  # app = Flask(__name__, instance_relative_config=True)
   # app.config.from_object('config.BaseConfiguration')
-
   db.init_app(app)
+  
+  with app.app_context():
+    db.create_all()
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
 
-  from .main import main as main_blueprint
-  app.register_blueprint(main_blueprint)
+    socketio.init_app(app,async_mode="eventlet")
 
-  socketio.init_app(app)
   return app

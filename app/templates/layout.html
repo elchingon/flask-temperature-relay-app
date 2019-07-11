@@ -16,44 +16,53 @@
             // The connection URL has the following format, relative to the current page:
             //     http[s]://<domain>:<port>[/<namespace>]
             var socket = io(namespace);
+            
+            var id1_min = $("#temp1_min_temp").val();
+            var id1_max = $("#temp1_max_temp").val();
+            var id2_min = $("#temp2_min_temp").val();
+            var id2_max = $("#temp2_max_temp").val();
+            var id3_min = $("#temp3_min_temp").val();
+            var id3_max = $("#temp3_max_temp").val();
             // Event handler for new connections.
             // The callback function is invoked when a connection with the
             // server is established.
-            socket.on('connect', function() {
-                $('#log').text( msg.data);
-            //   socket.emit('temp_updated', '22', 'v2temp1');
-                socket.emit('rerun_ac_control');
+            socket.on('connect', function(msg) {
+                // $('#log').text( msg.data);
+            //   socket.emit('temp_updated', '22', 'v2temp1');                
+                socket.emit('rerun_ac_control', id1_min, id1_max, id2_min, id2_max, id3_min, id3_max);
             });
             // Event handler for server sent data.
             // The callback function is invoked whenever the server emits data
             // to the client. The data is then displayed in the "Received"
             // section of the page.
             socket.on('temp_response', function(msg, cb) {
-                // console.log(msg)
-                $('#' + msg.temp_id + '_current').find('span').text(msg.new_temp);
-                if (cb)
-                    cb();
-
-                socket.emit('rerun_ac_control');
-            });
-            socket.on('compressor_response', function(msg, cb) {
-                // console.log(msg)
-                $('#log').text( msg.data);
-                if (cb)
-                    cb();
+                console.log(msg)
+                $('#' + msg.temp_id + '_current h4').find('span').text(msg.data);
+                // if (cb)
+                //     cb();
+                sleep(200)
+                socket.emit('rerun_ac_control', id1_min, id1_max, id2_min, id2_max, id3_min, id3_max);
             });
             
-          
-            $('form#broadcast').submit(function(event) {
-                socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
-                return false;
-            });
+            socket.on('compressor_response', function(msg, cb) {
+                console.log(msg)
+                if (msg.data != '') {
+                    $('#' + msg.temp_id + '_compressor').find('span').text(msg.data);
+                }
+                // if (cb)
+                //     cb();
+            });            
             
             $('form#disconnect').submit(function(event) {
                 socket.emit('disconnect_request');
                 return false;
             });
         });
+
+        function sleep(ms) {
+            console.log("sleep " + ms )
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
     </script>
 
 </head>
